@@ -1,5 +1,10 @@
+// Base URL of the FastAPI backend. Leave unset when frontend and backend share
+// an origin (e.g. FastAPI serving the built frontend); set it to something like
+// https://your-backend.onrender.com when they're deployed separately.
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
+
 export async function api(path, opts = {}) {
-  const res = await fetch(path, {
+  const res = await fetch(`${API_BASE}${path}`, {
     headers: { 'Content-Type': 'application/json' },
     ...opts,
     body: opts.body ? JSON.stringify(opts.body) : undefined,
@@ -10,6 +15,7 @@ export async function api(path, opts = {}) {
 }
 
 export function wsUrl(path) {
+  if (API_BASE) return `${API_BASE.replace(/^http/, 'ws')}${path}`
   const proto = window.location.protocol === 'https:' ? 'wss' : 'ws'
   return `${proto}://${window.location.host}${path}`
 }
