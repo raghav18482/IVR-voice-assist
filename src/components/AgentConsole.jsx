@@ -31,7 +31,7 @@ export default function AgentConsole({ call, send, agentName, setAgentName }) {
       <div className="panel-head">
         <div>
           <div className="eyebrow">Agent console · call {call.id}</div>
-          <h2>{call.lead.first_name} · {call.lead.mobile}</h2>
+          <h2>{call.lead.first_name || 'New caller'} · {call.lead.mobile}{call.channel === 'phone' && ` · ${call.direction === 'inbound' ? 'inbound' : 'outbound'} phone`}</h2>
         </div>
         <span className={`pill ${call.phase === 'ended' ? 'grey' : pending ? 'red pulse' : human ? 'blue' : 'green'}`}>
           {call.phase === 'ended' ? OUTCOME_LABEL[call.outcome] || call.outcome : pending ? 'Handoff waiting' : human ? `With ${call.human_agent}` : `AI · ${call.phase}`}

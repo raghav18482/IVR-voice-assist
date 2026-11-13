@@ -51,6 +51,7 @@ h2 { font-size: 17px; margin: 2px 0 6px; } h3 { font-size: 13px; margin: 16px 0 
 .lead { border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
 .lead.active { border-color: var(--brand); }
 .lead-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.lead-actions { display: flex; gap: 6px; }
 .gate { list-style: none; padding: 0; margin: 6px 0 0; font-size: 12px; }
 .gate li { padding: 2px 0; } .gate li.ok span:first-child { color: var(--green); }
 .gate li.bad span:first-child { color: var(--red); } .gate li.warn span:first-child { color: var(--amber); font-weight: 700; }

@@ -38,4 +38,7 @@ export const OUTCOME_LABEL = {
   declined_at_consent: 'Declined at consent',
   customer_hung_up: 'Customer hung up',
   ended_by_agent: 'Ended by agent',
+  no_answer: 'No answer',
+  busy: 'Line busy',
+  telephony_error: 'Phone line error',
 }
