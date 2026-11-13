@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // Dropped-off Energy leads. Every dial passes the pre-dial compliance gate first.
-export default function LeadsPanel({ leads, onCall, activeLead, refresh }) {
+export default function LeadsPanel({ leads, onCall, phoneEnabled, activeLead, refresh }) {
   const [open, setOpen] = useState(null)
   return (
     <div className="panel leads">
@@ -22,9 +22,14 @@ export default function LeadsPanel({ leads, onCall, activeLead, refresh }) {
                 <b>{l.first_name}</b> <span className="muted">#{l.id}</span>
                 <div className="muted small">Stopped at: {l.last_completed_step} · {l.source}</div>
               </div>
-              <button className={allowed ? 'primary' : 'blocked'} disabled={!allowed} onClick={() => onCall(l)}>
-                {allowed ? 'Call' : 'Blocked'}
-              </button>
+              <div className="lead-actions">
+                <button className={allowed ? 'primary' : 'blocked'} disabled={!allowed} onClick={() => onCall(l)}>
+                  {allowed ? 'Call' : 'Blocked'}
+                </button>
+                {phoneEnabled && allowed && (
+                  <button className="primary" title={`Twilio dials ${l.mobile}`} onClick={() => onCall(l, 'phone')}>Call phone</button>
+                )}
+              </div>
             </div>
             <button className="linkish" onClick={() => setOpen(open === l.id ? null : l.id)}>
               {allowed ? (warn ? 'Gate passed, with a warning' : 'Gate passed') : 'Why blocked?'} {open === l.id ? '▴' : '▾'}
